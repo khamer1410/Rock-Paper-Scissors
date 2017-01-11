@@ -1,0 +1,12 @@
+body {
+	background-color: silver;
+}
+
+* {
+	border: 1px solid blue;
+	box-sizing: border-box;
+}
+
+.container {
+	padding: 20px;
+}
