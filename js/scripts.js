@@ -14,6 +14,7 @@ var computerPointsElem = document.getElementById('js-computerPoints');
 
 var playerPickElem = document.getElementById('js-playerPick');
 var computerPickElem = document.getElementById('js-computerPick');
+
 var playerResultElem = document.getElementById('js-playerResult');
 var computerResultElem = document.getElementById('js-computerResult');
 
@@ -59,7 +60,7 @@ function newGame() {
 		setGameElements();
 
 		playerNameElem.innerHTML = player.name;
-		//setGamePoints(); //function pending
+		setGamePoints(); 
 	}
 }
 
@@ -73,7 +74,58 @@ function playerPick(playerPick) {
 
 	playerPickElem.innerHTML = playerPick;
 	computerPickElem.innerHTML = computerPick;
+
+	checkRoundWinner(playerPick, computerPick);
+}
+
+function checkRoundWinner(playerPick, computerPick) {
+	playerResultElem.innerHTML = computerResultElem.innerHTML = '';
+
+	var winnerIs = 'player';//win
+
+	if (playerPick === computerPick) {
+		winnerIs = 'no one'; //draw
+		playerResultElem.innerHTML = "Remis!";
+		computerResultElem.innerHTML = "Remis!";
+
+	} else if (
+		(computerPick === 'rock' && playerPick == 'scissors') ||
+		(computerPick === 'scissors' && playerPick == 'paper') ||
+		(computerPick === 'paper' && playerPick == 'rock') ) {
+		winnerIs = 'computer';//loose
+	}
+
+	if (winnerIs == 'player' ) {
+		playerResultElem.innerHTML = "Wygrana!";
+		player.score++;
+	} else if (winnerIs == 'computer') {
+		computerResultElem.innerHTML = "Wygrana!";
+		computer.score++;
+	}
+
+	setGamePoints(); //tego nie ma w Kodilla w tym meijscu, ale bez tego wyniki nie będą się aktualizować.
+	checkGameWinner();
+
+}
+
+function setGamePoints() {
+	playerPointsElem.innerHTML = player.score;
+	computerPointsElem.innerHTML = computer.score;
 }
 
 
+function checkGameWinner() {
+	if (player.score === 10 || computer.score === 10) {
+		getGameWinner = player.name;
+		if (computer.score > player.score) {
+			getGameWinner = "komputer";
+		}
+		gameEnded();
+	}
+}
 
+function gameEnded() {
+	alert('Wygrał ' + getGameWinner + '!!!');
+	gameState = 'ended';
+	setGameElements();
+}

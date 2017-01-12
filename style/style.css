@@ -3,10 +3,13 @@ body {
 }
 
 * {
-	border: 1px solid blue;
 	box-sizing: border-box;
 }
 
 .container {
 	padding: 20px;
+}
+
+#js-playerPickElement, #js-resultsTableElement {
+	display: none;
 }
