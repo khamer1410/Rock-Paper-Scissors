@@ -95,10 +95,10 @@ function checkRoundWinner(playerPick, computerPick) {
 		winnerIs = 'computer';//loose
 	}
 
-	if (winnerIs == 'player' ) {
+	if (winnerIs === 'player' ) {
 		playerResultElem.innerHTML = "Wygrana!";
 		player.score++;
-	} else if (winnerIs == 'computer') {
+	} else if (winnerIs === 'computer') {
 		computerResultElem.innerHTML = "Wygrana!";
 		computer.score++;
 	}
@@ -116,16 +116,16 @@ function setGamePoints() {
 
 function checkGameWinner() {
 	if (player.score === 10 || computer.score === 10) {
-		getGameWinner = player.name;
+		GameWinner = player.name;
 		if (computer.score > player.score) {
-			getGameWinner = "komputer";
+			GameWinner = "komputer";
 		}
-		gameEnded();
+		gameEnded(GameWinner);
 	}
 }
 
-function gameEnded() {
-	alert('Wygrał ' + getGameWinner + '!!!');
+function gameEnded(win) {
+	alert('Wygrał ' + win + '!!!');
 	gameState = 'ended';
 	setGameElements();
 }
