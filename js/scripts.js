@@ -116,11 +116,11 @@ function setGamePoints() {
 
 function checkGameWinner() {
 	if (player.score === 10 || computer.score === 10) {
-		GameWinner = player.name;
+		gameWinner = player.name;
 		if (computer.score > player.score) {
-			GameWinner = "komputer";
+			gameWinner = "komputer";
 		}
-		gameEnded(GameWinner);
+		gameEnded(gameWinner);
 	}
 }
 
