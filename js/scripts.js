@@ -19,7 +19,7 @@ var playerResultElem = document.getElementById('js-playerResult');
 var computerResultElem = document.getElementById('js-computerResult');
 
 //DEFAULT VALUES
-var gameState = 'notStarted'; //started //ended // czy to nie powinno być pod function?
+var gameState = 'notStarted';
 var player = {
 		name: '',
 		score: 0
@@ -50,7 +50,6 @@ function setGameElements() {
 			resultsElem.style.display = 'none';
 	}
 }
-//czy lepiej robić tak, czy stworzyć klasę css .off{dispaly: none} i JS dodawać ją do elementów?
 
 function newGame() {
 	player.name = prompt('wpisz swoje imię', 'imię gracza');
@@ -95,15 +94,15 @@ function checkRoundWinner(playerPick, computerPick) {
 		winnerIs = 'computer';//loose
 	}
 
-	if (winnerIs == 'player' ) {
+	if (winnerIs === 'player' ) {
 		playerResultElem.innerHTML = "Wygrana!";
 		player.score++;
-	} else if (winnerIs == 'computer') {
+	} else if (winnerIs === 'computer') {
 		computerResultElem.innerHTML = "Wygrana!";
 		computer.score++;
 	}
 
-	setGamePoints(); //tego nie ma w Kodilla w tym meijscu, ale bez tego wyniki nie będą się aktualizować.
+	setGamePoints();
 	checkGameWinner();
 
 }
@@ -116,16 +115,16 @@ function setGamePoints() {
 
 function checkGameWinner() {
 	if (player.score === 10 || computer.score === 10) {
-		getGameWinner = player.name;
+		var gameWinner = player.name;
 		if (computer.score > player.score) {
-			getGameWinner = "komputer";
+			gameWinner = "komputer";
 		}
-		gameEnded();
+		gameEnded(gameWinner);
 	}
 }
 
-function gameEnded() {
-	alert('Wygrał ' + getGameWinner + '!!!');
+function gameEnded(win) {
+	alert('Wygrał ' + win + '!!!');
 	gameState = 'ended';
 	setGameElements();
 }
